@@ -73,7 +73,24 @@ class Login(LoginView):
     template_name = 'registration/login.html'
     form_class=LoginForm
     next_page = reverse_lazy('home')
-    
+    def form_valid(self, form):
+        user = form.save()
+        
+        send_mail(
+            "Добро пожаловать в Olau! Вы успешно зашли на аккаунт",
+            f"""Здравствуйте, {user.username}!
+
+Вы вошли в Olau! Мы рады сообщить, что вы успешно вошли. Теперь вы можете начать пользоваться всеми возможностями нашего сервиса.
+
+Спасибо, что выбрали Olau!
+
+С уважением,
+Команда Olau""",
+            settings.EMAIL_HOST_USER,
+            [user.email],
+            fail_silently=False
+        )
+        return super().form_valid(form)
 
 
 class Logout(LogoutView):
