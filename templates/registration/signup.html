@@ -1,0 +1,32 @@
+{% extends './base_registration.html' %}
+{% load static %}
+
+{% block content %}
+
+<p class="title">Registration</p>
+        <div class="content">
+            
+            <form method="post" class="signupform">
+                {% csrf_token %}
+                {%  if form.errors  %}
+                    {% for error in form.errors.as_data.values %}
+                        {% for data in error.0 %}
+                            {{ data }}
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+                {{form.email}}
+                {{form.username}}
+                {{form.username.error}}
+                {{form.password1}}
+                {{form.password1.error}}
+                {{form.password2}}
+                {{form.password2.error}}
+
+                <input type="submit" value="Sign up">
+            </form>
+        </div>
+        <p class="plogin">Do you have an account?<a href="{% url 'login' %}" class="a">Login</a></p>
+
+
+{% endblock %}

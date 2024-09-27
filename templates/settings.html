@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <h1>Settings</h1>
+    <div>
+        <form action="{% url 'password_change' %}" method="post"></form>
+            {% csrf_token %}
+            <button type="submit">Password change</button>
+        </form>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+        <a href="Удалить аккаунт"></a>
+    </div>
+    
+
+
+
+{% endblock %}

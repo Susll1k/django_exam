@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="not">
+    {% for not in notification %}
+            <div>  <div class="username">
+                <img src="{{ not.author.picture.url }}" class="logo">
+                <p>{{ not.author.username }}</p>
+                {% if not.text %}
+                    <p>send a comment on</p>
+                {% else %}
+                    <p>liked it on</p>
+                {% endif %}
+                {{ not.created_at }}
+                </div>
+                <div class="line2"></div>
+            </div>
+            
+    {% endfor %}
+</div>
+
+
+
+
+{% endblock %}

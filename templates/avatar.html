@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1 class="title">New photo</h1>
+
+<form method="post" enctype="multipart/form-data" class="create-form">
+    {% csrf_token %}
+
+    <div class="preview-container2" id="preview-container">
+        <img id="preview-image" class="avatar_photo" src="">
+    </div>
+
+    <label for="file-upload" class="upload-btn2">Choose</label>
+    {{ form.picture }}
+    
+
+    <button type="submit" class="create_button">Save new photo</button>
+
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="profilediv">
+        <img src="{{ user.picture.url }}" class="profile">
+        <h3>{{ user.username }}</h3>
+        <button id="open" class="edit">Edit profile</button>
+
+        <div class="modal">
+        <div class="modal-content">
+            <form method="post" enctype="multipart/form-data" class="edit-form">
+                {% csrf_token %}
+                    <div class="preview-container2" id="preview-container">
+                        <img id="preview-image" class="avatar_photo" src="{{ user.picture.url }}">
+                        <label for="file-upload" class="upload-btn2" name="'picture">Choose</label>
+                        {{ form.picture }}
+                    </div>
+                    <input type="text" name="username_input" id="username_input" placeholder="Username">
+                
+                
+                <button type="submit" class="create_button">Edit</button>
+            
+            </form>
+            <div class="close-div">
+                <button id="close">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    {% for post in posts %}
+    <div class="box">
+        
+        <div class="username">
+            <img src="{{ post.author.picture.url }}" class="logo">
+            <p>{{ post.author.username }}</p>
+        </div>
+        <img src="{{ post.image.url }}" class="img">
+        <p class="p">{{ post.title }}</p>
+
+
+        <div class="icons_div">
+            <div class="like_div">
+                {% if post.id in liked_posts %}
+                    <img class="like-icon" id="like-icon-{{ post.id }}" src="{% static 'img/icons8-love-24 (1).png' %}" onclick="toggleLikeImage({{ post.id }}, {{ request.user.id }})">
+                {% else %}
+                    <img class="like-icon" id="like-icon-{{ post.id }}" src="{% static 'img/icons8-love-24 (2).png' %}" onclick="toggleLikeImage({{ post.id }}, {{ request.user.id }})">
+                {% endif %}
+                {{ post.likes.count }}
+            </div>
+            <a href="{% url 'review' post.id %}"><img class="like-icon" id="like-comment-{{ post.id }}" src="{% static 'img/icon_comment.png' %}"></a>
+        </div>
+    </div>
+    {% endfor %}
+
+
+<script>
+
+</script>
+{% endblock %}

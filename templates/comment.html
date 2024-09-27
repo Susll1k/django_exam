@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="post-review">
+        <div>
+            <img src="{{ post.image.url }}" class="img-review">
+        </div>
+
+        <div class="review-div">
+            <div class="username">
+                <img src="{{ post.author.picture.url }}" class="logo">
+                <h4>{{ post.author.username }}</h4>
+                <h4>{{ post.title }}</h4>
+            </div>
+        <div class="line2"></div>
+        <div class="rrr">
+            {% for review in post.reviews.all %}
+                <div class="review">
+                    <img src="{{ review.author.picture.url }}" class="logo-review">
+                    <h3>{{ review.author.username }}</h5>
+                    <p>{{ review.text }}</p>
+                </div>
+            {% endfor %}
+
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="text" class="review-input">
+            <button type="submit" class="create_button">Create</button>
+        </form>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

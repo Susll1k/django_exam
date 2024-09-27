@@ -1,0 +1,24 @@
+{% extends './base_registration.html' %}
+{% load static %}
+
+{% block content %}
+
+<p class="title">Login</p>
+        <div class="content">
+            <form method="post" class="signupform">
+                {% csrf_token %}
+                {%  if form.errors  %}
+                    {% for error in form.errors.as_data.values %}
+                        {% for data in error.0 %}
+                            {{ data }}
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+                {{form.username}}
+                {{form.password}}
+                <input type="submit" value="Login">
+            </form>
+        </div>
+        <p class="plogin">Don't have an account yet?<a href="{% url 'signup' %}" class="a">Sign Up</a></p>
+
+{% endblock %}

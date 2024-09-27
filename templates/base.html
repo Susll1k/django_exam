@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body{
+            background-image: url('{% static "img/Group 8.png"%}');
+            background-size: auto;
+            background-position: top;
+            padding-bottom: 100px;
+            min-height: 650px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h1>OLAU</h1>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'create' %}">Create</a></li>
+            <li><a href="{% url 'notification' %}">Notification</a></li>
+            <li><a href="{% url 'profile' %}">Profile</a></li>
+            <li><a href="#">Settings</a><ul>
+                    <li><form action="{% url 'password_change' %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Password change" class="logout"></input>
+                    </form></li>
+                    <li><form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Logout" class="logout"></input>
+                    </form></li>
+                    <li><a href="#">Account Delete</a></li>
+            </ul></li>
+        </ul>
+    </nav>
+    <div class="line"></div>
+
+
+    <div class="conteiner">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+</html>
