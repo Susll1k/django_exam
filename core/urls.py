@@ -9,8 +9,8 @@ from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('social_django.urls', namespace='social')),
-    path('home/', home, name='home'),
-    path('', Login.as_view(), name='login'),
+    path('', home, name='home'),
+    path('login/', Login.as_view(), name='login'),
     path('singup/', SignUp.as_view(), name='signup'),
     path('logout/', Logout.as_view(), name='logout'),
     path('choose_photo/<int:pk>', ChoosePhoto.as_view(), name='choose_photo'),
